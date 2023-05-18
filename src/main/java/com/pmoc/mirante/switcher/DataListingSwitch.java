@@ -1,16 +1,15 @@
 package com.pmoc.mirante.switcher;
 
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.gerais.Gerais;
 
 public record DataListingSwitch(
         Long id,
-        String tag,
-        String marca,
-        String modelo,
+        Gerais gerais,
         int qtd_portas,
         Categories category
 ) {
     public DataListingSwitch(Switcher switcher){
-        this(switcher.getId(), switcher.getTag(), switcher.getMarca(), switcher.getModelo(), switcher.getQtd_portas(), switcher.getCategory());
+        this(switcher.getId(), switcher.getGerais(), switcher.getQtd_portas(), switcher.getCategory());
     }
 }

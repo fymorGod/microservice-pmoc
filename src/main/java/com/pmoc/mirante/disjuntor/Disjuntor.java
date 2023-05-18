@@ -1,52 +1,49 @@
-package com.pmoc.mirante.nobreak;
+package com.pmoc.mirante.disjuntor;
 
-import com.pmoc.mirante.dtos.NobrekDTO;
+import com.pmoc.mirante.dtos.DisjuntorDTO;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.gerais.Gerais;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "nobreaks")
-@Entity(name = "Nobreak")
+@Table(name = "disjuntores")
+@Entity(name = "Disjuntor")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Nobreak {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Disjuntor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Embedded
     private Gerais gerais;
-    private int tensao_entrada;
-    private int tensao_saida;
+    private int corrente_maxima;
+    @Enumerated(EnumType.STRING)
     private Categories category;
     private Boolean active;
-    public Nobreak(NobrekDTO data){
+    public Disjuntor(DisjuntorDTO data) {
 
         this.active = true;
         this.gerais = new Gerais(data.gerais());
-        this.tensao_entrada = data.tensao_entrada();
-        this.tensao_saida = data.tensao_saida();
         this.category = data.category();
+        this.corrente_maxima = data.corrente_maxima();
     }
-    public void updateInfo(@Valid DataUpdatingNobreak dados) {
+    public void updateInfo(DataUpdatingDisjuntor dados) {
 
         if(dados.gerais() != null) {
             this.gerais.updateInfo(dados.gerais());
         }
-        if(dados.tensao_entrada() >= 0) {
-            this.tensao_entrada = dados.tensao_entrada();
+        if(dados.corrente_maxima() <= 0) {
+            this.corrente_maxima = dados.corrente_maxima();
         }
-        if(dados.tensao_saida() >= 0) {
-            this.tensao_saida = dados.tensao_saida();
+        if(dados.category() != null) {
+            this.category = dados.category();
         }
     }
-
     public void delete() {
 
         this.active = false;

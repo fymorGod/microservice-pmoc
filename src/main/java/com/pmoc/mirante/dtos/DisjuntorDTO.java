@@ -6,15 +6,14 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record NobrekDTO(
+public record DisjuntorDTO(
         @NotNull
         @Valid
         DadosGerais gerais,
         @NotBlank
-        int tensao_entrada,
-        @NotBlank
-        int tensao_saida,
+        int corrente_maxima,
         @NotNull
         Categories category
 ) {
+
 }

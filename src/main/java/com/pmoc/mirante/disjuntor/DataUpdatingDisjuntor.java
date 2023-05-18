@@ -1,14 +1,14 @@
-package com.pmoc.mirante.arcondicionado;
+package com.pmoc.mirante.disjuntor;
 
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.gerais.DadosGerais;
 import jakarta.validation.constraints.NotNull;
 
-public record DataUpdatingArCondicionados(
+public record DataUpdatingDisjuntor(
         @NotNull
         Long id,
         DadosGerais gerais,
-        int potencia,
-        int tensao,
-        Categories category) {
+        int corrente_maxima,
+        Categories category
+) {
 }

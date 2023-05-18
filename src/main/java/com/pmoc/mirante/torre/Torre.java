@@ -1,39 +1,57 @@
-package com.pmoc.mirante.telemetria;
+package com.pmoc.mirante.torre;
 
-import com.pmoc.mirante.dtos.TelemetriaDTO;
+import com.pmoc.mirante.dtos.TorreDTO;
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.enums.TiposTorre;
 import com.pmoc.mirante.gerais.Gerais;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "telemetrias")
-@Entity(name = "Telemetria")
+@Table(name = "torres")
+@Entity(name = "Torre")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Telemetria {
+public class Torre {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Embedded
     private Gerais gerais;
+    @Enumerated(EnumType.STRING)
     private Categories category;
+    @Enumerated(EnumType.STRING)
+    private TiposTorre tipos_estrutura;
     private Boolean active;
+    private Boolean aterramento;
+    private Double altura;
 
-    public Telemetria(TelemetriaDTO data){
+    public Torre(TorreDTO data){
         this.active = true;
+        this.altura = data.altura();
+        this.aterramento = data.aterramento();
         this.gerais = new Gerais(data.gerais());
         this.category = data.category();
+        this.tipos_estrutura = data.tipos_estrutura();
     }
-    public void updateInfo(@Valid DataUpdatingTelemetria dados) {
+    public void updateInfo(DataUpdatingTorre dados) {
 
         if(dados.gerais() != null) {
             this.gerais.updateInfo(dados.gerais());
+        }
+        if(dados.aterramento() != null) {
+            this.aterramento = dados.aterramento();
+        }
+        if(dados.altura() > 0) {
+            this.altura = dados.altura();
+        }
+        if(dados.tipos_estrutura() != null) {
+            this.tipos_estrutura = dados.tipos_estrutura();
         }
         if(dados.category() != null) {
             this.category = dados.category();

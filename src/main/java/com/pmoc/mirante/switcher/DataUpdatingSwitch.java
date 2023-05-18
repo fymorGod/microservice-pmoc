@@ -1,14 +1,13 @@
 package com.pmoc.mirante.switcher;
 
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.gerais.DadosGerais;
 import jakarta.validation.constraints.NotNull;
 
 public record DataUpdatingSwitch(
         @NotNull
         Long id,
-        String tag,
-        String marca,
-        String modelo,
+        DadosGerais gerais,
         int qtd_portas,
         Categories category
 ) {

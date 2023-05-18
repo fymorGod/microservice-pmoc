@@ -1,16 +1,15 @@
 package com.pmoc.mirante.dtos;
 
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.gerais.DadosGerais;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record ArCondicionadoDTO(
-        @NotBlank
-        String tag,
-        @NotBlank
-        String modelo,
-        @NotBlank
-        String marca,
+        @NotNull
+        @Valid
+        DadosGerais gerais,
         @NotNull
         int potencia,
         @NotNull

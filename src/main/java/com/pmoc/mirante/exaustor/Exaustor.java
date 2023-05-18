@@ -2,6 +2,7 @@ package com.pmoc.mirante.exaustor;
 
 import com.pmoc.mirante.dtos.ExaustorDTO;
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.gerais.Gerais;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -19,29 +20,20 @@ public class Exaustor {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tag;
-    private String marca;
-    private String modelo;
+    @Embedded
+    private Gerais gerais;
     private Categories category;
     private Boolean active;
 
     public Exaustor(ExaustorDTO data) {
         this.active = true;
-        this.tag = data.tag();
-        this.marca = data.marca();
-        this.modelo = data.modelo();
+        this.gerais = new Gerais(data.gerais());
         this.category = data.category();
     }
     public void updateInfo(@Valid DataUpdatingExaustor dados) {
 
-        if(dados.tag() != null) {
-            this.tag = dados.tag();
-        }
-        if(dados.marca() != null) {
-            this.marca = dados.marca();
-        }
-        if(dados.modelo() != null) {
-            this.modelo = dados.modelo();
+        if(dados.gerais() != null) {
+            this.gerais.updateInfo(dados.gerais());
         }
         if(dados.category() != null) {
             this.category = dados.category();

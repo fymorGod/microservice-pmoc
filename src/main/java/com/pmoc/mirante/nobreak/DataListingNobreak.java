@@ -1,17 +1,16 @@
 package com.pmoc.mirante.nobreak;
 
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.gerais.Gerais;
 
 public record DataListingNobreak(
         Long id,
-        String tag,
-        String marca,
-        String modelo,
+        Gerais gerais,
         int tensao_entrada,
         int tensao_saida,
         Categories category
 ) {
     public DataListingNobreak(Nobreak nobreak){
-        this(nobreak.getId(), nobreak.getTag(), nobreak.getMarca(), nobreak.getModelo(), nobreak.getTensao_entrada(), nobreak.getTensao_saida(), nobreak.getCategory());
+        this(nobreak.getId(), nobreak.getGerais(), nobreak.getTensao_entrada(), nobreak.getTensao_saida(), nobreak.getCategory());
     }
 }

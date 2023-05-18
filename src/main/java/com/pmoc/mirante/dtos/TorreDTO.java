@@ -1,20 +1,23 @@
 package com.pmoc.mirante.dtos;
 
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.enums.TiposTorre;
 import com.pmoc.mirante.gerais.DadosGerais;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record NobrekDTO(
+public record TorreDTO(
         @NotNull
         @Valid
         DadosGerais gerais,
         @NotBlank
-        int tensao_entrada,
+        Double altura,
         @NotBlank
-        int tensao_saida,
+        Boolean aterramento,
         @NotNull
-        Categories category
+        Categories category,
+        @NotNull
+        TiposTorre tipos_estrutura
 ) {
 }

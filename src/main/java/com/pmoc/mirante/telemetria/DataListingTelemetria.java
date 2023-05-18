@@ -1,15 +1,14 @@
 package com.pmoc.mirante.telemetria;
 
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.gerais.Gerais;
 
 public record DataListingTelemetria(
         Long id,
-        String tag,
-        String marca,
-        String modelo,
+        Gerais gerais,
         Categories category
 ) {
     public DataListingTelemetria(Telemetria telemetria){
-        this(telemetria.getId(), telemetria.getTag(), telemetria.getMarca(), telemetria.getModelo(), telemetria.getCategory());
+        this(telemetria.getId(), telemetria.getGerais(), telemetria.getCategory());
     }
 }

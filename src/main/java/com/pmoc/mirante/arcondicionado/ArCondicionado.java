@@ -2,6 +2,8 @@ package com.pmoc.mirante.arcondicionado;
 
 import com.pmoc.mirante.dtos.ArCondicionadoDTO;
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.gerais.DadosGerais;
+import com.pmoc.mirante.gerais.Gerais;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,9 +22,8 @@ public class ArCondicionado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tag;
-    private String marca;
-    private String modelo;
+    @Embedded
+    private Gerais gerais;
     private int potencia;
     private int tensao;
     @Enumerated(EnumType.STRING)
@@ -32,28 +33,20 @@ public class ArCondicionado {
     public ArCondicionado(ArCondicionadoDTO arCondicionadoDTO) {
 
         this.active = true;
-        this.tag = arCondicionadoDTO.tag();
-        this.marca = arCondicionadoDTO.marca();
-        this.modelo = arCondicionadoDTO.modelo();
+        this.gerais = new Gerais(arCondicionadoDTO.gerais());
         this.potencia = arCondicionadoDTO.potencia();
         this.tensao = arCondicionadoDTO.tensao();
         this.category = arCondicionadoDTO.category();
     }
     public void updateInfo(DataUpdatingArCondicionados dados) {
 
-        if(dados.tag() != null) {
-            this.tag = dados.tag();
+        if(dados.gerais() != null) {
+            this.gerais.updateInfo(dados.gerais());
         }
-        if(dados.marca() != null) {
-            this.marca = dados.marca();
-        }
-        if(dados.modelo() != null) {
-            this.modelo = dados.modelo();
-        }
-        if(dados.potencia() <= 0) {
+        if(dados.potencia() > 0) {
             this.potencia = dados.potencia();
         }
-        if(dados.tensao() <= 0) {
+        if(dados.tensao() > 0) {
             this.tensao = dados.tensao();
         }
         if(dados.category() != null) {
