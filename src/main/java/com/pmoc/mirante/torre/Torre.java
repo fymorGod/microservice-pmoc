@@ -47,7 +47,7 @@ public class Torre {
         if(dados.aterramento() != null) {
             this.aterramento = dados.aterramento();
         }
-        if(dados.altura() > 0) {
+        if(dados.altura() != null) {
             this.altura = dados.altura();
         }
         if(dados.tipos_estrutura() != null) {
