@@ -1,6 +1,5 @@
 package com.pmoc.mirante.parabolica;
 
-import com.pmoc.mirante.arcondicionado.DataUpdatingArCondicionados;
 import com.pmoc.mirante.dtos.ParabolicaDTO;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.gerais.Gerais;
