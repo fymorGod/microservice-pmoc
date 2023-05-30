@@ -3,6 +3,9 @@ package com.pmoc.mirante.antena;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.enums.TiposAntena;
 import com.pmoc.mirante.gerais.Gerais;
+import com.pmoc.mirante.transmissor.Transmissor;
+
+import java.util.List;
 
 public record DataListingAntena(
         Long id,
@@ -12,9 +15,10 @@ public record DataListingAntena(
         String vr,
         Double fendas,
         String gain,
-        TiposAntena tipos_antena
+        TiposAntena tipos_antena,
+        List<Transmissor> transmissor
 ) {
     public DataListingAntena(Antena antena) {
-        this(antena.getId(), antena.getGerais(), antena.getPosicao_torre(), antena.getCategory(), antena.getVr(), antena.getFendas(), antena.getGain(),antena.getTiposAntena());
+        this(antena.getId(), antena.getGerais(), antena.getPosicao_torre(), antena.getCategory(), antena.getVr(), antena.getFendas(), antena.getGain(),antena.getTiposAntena(), antena.getTransmissor());
     }
 }

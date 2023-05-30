@@ -3,7 +3,10 @@ package com.pmoc.mirante.antena;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.enums.TiposAntena;
 import com.pmoc.mirante.gerais.DadosGerais;
+import com.pmoc.mirante.transmissor.Transmissor;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 
 public record DataUpdatingAntena(
         @NotNull
@@ -14,6 +17,7 @@ public record DataUpdatingAntena(
         String gain,
         Double fendas,
         Double posicao_torre,
-        String vr
+        String vr,
+        List<Transmissor> transmissor
 ) {
 }

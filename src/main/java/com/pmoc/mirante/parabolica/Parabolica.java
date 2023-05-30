@@ -61,4 +61,8 @@ public class Parabolica {
             this.category = dados.category();
         }
     }
+    public void delete() {
+
+        this.active = false;
+    }
 }

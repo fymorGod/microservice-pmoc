@@ -40,5 +40,26 @@ public class Receptor {
         this.parabolica = data.parabolica();
         this.category = data.category();
     }
+    public void updateInfo(DataUpdatingReceptor dados){
+        if(dados.gerais() != null) {
+            this.gerais.updateInfo(dados.gerais());
+        }
+        if(dados.category() != null) {
+            this.category = dados.category();
+        }
+        if(dados.frequency() > 0){
+            this.frequency = dados.frequency();
+        }
+        if(dados.symbol_rate() >0 ){
+            this.symbol_rate = dados.symbol_rate();
+        }
+        if(dados.parabolica() != null){
+            this.parabolica = dados.parabolica();
+        }
+    }
+    public void delete() {
+
+        this.active = false;
+    }
 
 }

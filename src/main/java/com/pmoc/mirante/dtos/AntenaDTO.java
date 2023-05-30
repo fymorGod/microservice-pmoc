@@ -3,9 +3,12 @@ package com.pmoc.mirante.dtos;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.enums.TiposAntena;
 import com.pmoc.mirante.gerais.DadosGerais;
+import com.pmoc.mirante.transmissor.Transmissor;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 
 public record AntenaDTO(
         @NotNull
@@ -22,6 +25,8 @@ public record AntenaDTO(
         @NotBlank
         Double posicao_torre,
         @NotBlank
-        String gain
+        String gain,
+        @NotNull
+        List<Transmissor> transmissor
 ) {
 }

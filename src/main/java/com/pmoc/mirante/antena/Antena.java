@@ -4,11 +4,14 @@ import com.pmoc.mirante.dtos.AntenaDTO;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.enums.TiposAntena;
 import com.pmoc.mirante.gerais.Gerais;
+import com.pmoc.mirante.transmissor.Transmissor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table(name = "antenas")
 @Entity(name = "Antena")
@@ -31,6 +34,8 @@ public class Antena {
     private Double posicao_torre;
     private String vr;
     private Boolean active;
+    @OneToMany(mappedBy = "transmissor")
+    private List<Transmissor> transmissor;
 
     public Antena(AntenaDTO data){
         this.active = true;
@@ -41,6 +46,7 @@ public class Antena {
         this.gerais = new Gerais(data.gerais());
         this.fendas = data.fendas();
         this.tiposAntena = data.tipos_antena();
+        this.transmissor = data.transmissor();
     }
 
     public void updateInfo(DataUpdatingAntena dados) {
@@ -64,6 +70,9 @@ public class Antena {
         }
         if(dados.category() != null) {
             this.category = dados.category();
+        }
+        if(dados.transmissor() != null){
+            this.transmissor = dados.transmissor();
         }
     }
     public void delete() {
