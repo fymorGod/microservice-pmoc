@@ -1,9 +1,8 @@
 package com.pmoc.mirante.dtos;
 
 import com.pmoc.mirante.enums.Categories;
-import com.pmoc.mirante.gerais.DadosGerais;
+import com.pmoc.mirante.models.gerais.DadosGerais;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record SwitcherDTO(

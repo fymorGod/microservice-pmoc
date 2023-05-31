@@ -1,10 +1,10 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.UserDTO;
-import com.pmoc.mirante.user.DataListingUser;
-import com.pmoc.mirante.user.DataUpdatingUser;
-import com.pmoc.mirante.user.User;
-import com.pmoc.mirante.user.UserRepository;
+import com.pmoc.mirante.models.user.DataListingUser;
+import com.pmoc.mirante.models.user.DataUpdatingUser;
+import com.pmoc.mirante.models.user.User;
+import com.pmoc.mirante.models.user.UserRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

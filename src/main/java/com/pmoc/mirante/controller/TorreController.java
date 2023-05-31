@@ -1,11 +1,10 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.arcondicionado.DataListingArCondicionados;
 import com.pmoc.mirante.dtos.TorreDTO;
-import com.pmoc.mirante.torre.DataListingTorre;
-import com.pmoc.mirante.torre.DataUpdatingTorre;
-import com.pmoc.mirante.torre.Torre;
-import com.pmoc.mirante.torre.TorreRepository;
+import com.pmoc.mirante.models.torre.DataListingTorre;
+import com.pmoc.mirante.models.torre.DataUpdatingTorre;
+import com.pmoc.mirante.models.torre.Torre;
+import com.pmoc.mirante.models.torre.TorreRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

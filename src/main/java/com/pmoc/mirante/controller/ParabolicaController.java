@@ -1,10 +1,10 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.ParabolicaDTO;
-import com.pmoc.mirante.parabolica.DataParabolicaListing;
-import com.pmoc.mirante.parabolica.DataUpdatingParabolica;
-import com.pmoc.mirante.parabolica.Parabolica;
-import com.pmoc.mirante.parabolica.ParabolicaRepository;
+import com.pmoc.mirante.models.parabolica.DataParabolicaListing;
+import com.pmoc.mirante.models.parabolica.DataUpdatingParabolica;
+import com.pmoc.mirante.models.parabolica.Parabolica;
+import com.pmoc.mirante.models.parabolica.ParabolicaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

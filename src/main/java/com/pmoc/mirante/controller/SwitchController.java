@@ -1,10 +1,10 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.SwitcherDTO;
-import com.pmoc.mirante.switcher.DataListingSwitch;
-import com.pmoc.mirante.switcher.DataUpdatingSwitch;
-import com.pmoc.mirante.switcher.SwitchRepository;
-import com.pmoc.mirante.switcher.Switcher;
+import com.pmoc.mirante.models.switcher.DataListingSwitch;
+import com.pmoc.mirante.models.switcher.DataUpdatingSwitch;
+import com.pmoc.mirante.models.switcher.SwitchRepository;
+import com.pmoc.mirante.models.switcher.Switcher;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

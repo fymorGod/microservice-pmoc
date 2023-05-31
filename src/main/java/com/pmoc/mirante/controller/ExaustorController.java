@@ -1,10 +1,10 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.ExaustorDTO;
-import com.pmoc.mirante.exaustor.DataListingExaustor;
-import com.pmoc.mirante.exaustor.DataUpdatingExaustor;
-import com.pmoc.mirante.exaustor.Exaustor;
-import com.pmoc.mirante.exaustor.ExaustorRepository;
+import com.pmoc.mirante.models.exaustor.DataListingExaustor;
+import com.pmoc.mirante.models.exaustor.DataUpdatingExaustor;
+import com.pmoc.mirante.models.exaustor.Exaustor;
+import com.pmoc.mirante.models.exaustor.ExaustorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,9 +1,9 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.arcondicionado.ArCondicionado;
-import com.pmoc.mirante.arcondicionado.ArCondicionadoRepository;
-import com.pmoc.mirante.arcondicionado.DataListingArCondicionados;
-import com.pmoc.mirante.arcondicionado.DataUpdatingArCondicionados;
+import com.pmoc.mirante.models.arcondicionado.ArCondicionado;
+import com.pmoc.mirante.models.arcondicionado.ArCondicionadoRepository;
+import com.pmoc.mirante.models.arcondicionado.DataListingArCondicionados;
+import com.pmoc.mirante.models.arcondicionado.DataUpdatingArCondicionados;
 import com.pmoc.mirante.dtos.ArCondicionadoDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

@@ -1,9 +1,9 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.disjuntor.DataListingDisjuntor;
-import com.pmoc.mirante.disjuntor.DataUpdatingDisjuntor;
-import com.pmoc.mirante.disjuntor.Disjuntor;
-import com.pmoc.mirante.disjuntor.DisjuntorRepository;
+import com.pmoc.mirante.models.disjuntor.DataListingDisjuntor;
+import com.pmoc.mirante.models.disjuntor.DataUpdatingDisjuntor;
+import com.pmoc.mirante.models.disjuntor.Disjuntor;
+import com.pmoc.mirante.models.disjuntor.DisjuntorRepository;
 import com.pmoc.mirante.dtos.DisjuntorDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

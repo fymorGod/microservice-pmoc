@@ -1,8 +1,8 @@
 package com.pmoc.mirante.dtos;
 
 import com.pmoc.mirante.enums.Categories;
-import com.pmoc.mirante.gerais.DadosGerais;
-import com.pmoc.mirante.parabolica.Parabolica;
+import com.pmoc.mirante.models.gerais.DadosGerais;
+import com.pmoc.mirante.models.parabolica.Parabolica;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 

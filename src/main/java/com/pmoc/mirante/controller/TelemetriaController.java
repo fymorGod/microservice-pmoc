@@ -1,10 +1,10 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.TelemetriaDTO;
-import com.pmoc.mirante.telemetria.DataListingTelemetria;
-import com.pmoc.mirante.telemetria.DataUpdatingTelemetria;
-import com.pmoc.mirante.telemetria.Telemetria;
-import com.pmoc.mirante.telemetria.TelemetriaRepository;
+import com.pmoc.mirante.models.telemetria.DataListingTelemetria;
+import com.pmoc.mirante.models.telemetria.DataUpdatingTelemetria;
+import com.pmoc.mirante.models.telemetria.Telemetria;
+import com.pmoc.mirante.models.telemetria.TelemetriaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

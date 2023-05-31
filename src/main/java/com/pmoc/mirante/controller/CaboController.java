@@ -1,9 +1,9 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.cabo.Cabo;
-import com.pmoc.mirante.cabo.CaboRepository;
-import com.pmoc.mirante.cabo.DataListingCabo;
-import com.pmoc.mirante.cabo.DataUpdatingCabo;
+import com.pmoc.mirante.models.cabo.Cabo;
+import com.pmoc.mirante.models.cabo.CaboRepository;
+import com.pmoc.mirante.models.cabo.DataListingCabo;
+import com.pmoc.mirante.models.cabo.DataUpdatingCabo;
 import com.pmoc.mirante.dtos.CaboDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

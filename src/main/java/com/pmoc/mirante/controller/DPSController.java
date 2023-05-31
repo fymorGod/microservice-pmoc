@@ -1,9 +1,9 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.dps.DPS;
-import com.pmoc.mirante.dps.DPSRepository;
-import com.pmoc.mirante.dps.DataListingDPS;
-import com.pmoc.mirante.dps.DataUpdatingDPS;
+import com.pmoc.mirante.models.dps.DPS;
+import com.pmoc.mirante.models.dps.DPSRepository;
+import com.pmoc.mirante.models.dps.DataListingDPS;
+import com.pmoc.mirante.models.dps.DataUpdatingDPS;
 import com.pmoc.mirante.dtos.DPSDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

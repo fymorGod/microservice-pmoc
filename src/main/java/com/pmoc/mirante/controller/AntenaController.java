@@ -1,9 +1,9 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.antena.Antena;
-import com.pmoc.mirante.antena.AntenaRepository;
-import com.pmoc.mirante.antena.DataListingAntena;
-import com.pmoc.mirante.antena.DataUpdatingAntena;
+import com.pmoc.mirante.models.antena.Antena;
+import com.pmoc.mirante.models.antena.AntenaRepository;
+import com.pmoc.mirante.models.antena.DataListingAntena;
+import com.pmoc.mirante.models.antena.DataUpdatingAntena;
 import com.pmoc.mirante.dtos.AntenaDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

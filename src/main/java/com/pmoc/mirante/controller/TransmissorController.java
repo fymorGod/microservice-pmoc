@@ -1,10 +1,10 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.TransmissorDTO;
-import com.pmoc.mirante.transmissor.DadosListingTransmissor;
-import com.pmoc.mirante.transmissor.DadosUpdatingTransmissor;
-import com.pmoc.mirante.transmissor.Transmissor;
-import com.pmoc.mirante.transmissor.TransmissorRepository;
+import com.pmoc.mirante.models.transmissor.DadosListingTransmissor;
+import com.pmoc.mirante.models.transmissor.DadosUpdatingTransmissor;
+import com.pmoc.mirante.models.transmissor.Transmissor;
+import com.pmoc.mirante.models.transmissor.TransmissorRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

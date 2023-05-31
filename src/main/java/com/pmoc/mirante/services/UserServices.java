@@ -1,14 +1,12 @@
 package com.pmoc.mirante.services;
 
-import com.pmoc.mirante.user.DataListingUser;
-import com.pmoc.mirante.user.User;
-import com.pmoc.mirante.user.UserRepository;
+import com.pmoc.mirante.models.user.DataListingUser;
+import com.pmoc.mirante.models.user.User;
+import com.pmoc.mirante.models.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServices {

@@ -1,9 +1,9 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.combinador.Combinador;
-import com.pmoc.mirante.combinador.CombinadorRepository;
-import com.pmoc.mirante.combinador.DataListingCombinador;
-import com.pmoc.mirante.combinador.DataUpdatingCombinador;
+import com.pmoc.mirante.models.combinador.Combinador;
+import com.pmoc.mirante.models.combinador.CombinadorRepository;
+import com.pmoc.mirante.models.combinador.DataListingCombinador;
+import com.pmoc.mirante.models.combinador.DataUpdatingCombinador;
 import com.pmoc.mirante.dtos.CombinadorDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

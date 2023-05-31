@@ -1,10 +1,10 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.NobrekDTO;
-import com.pmoc.mirante.nobreak.DataListingNobreak;
-import com.pmoc.mirante.nobreak.DataUpdatingNobreak;
-import com.pmoc.mirante.nobreak.Nobreak;
-import com.pmoc.mirante.nobreak.NobreakRepository;
+import com.pmoc.mirante.models.nobreak.DataListingNobreak;
+import com.pmoc.mirante.models.nobreak.DataUpdatingNobreak;
+import com.pmoc.mirante.models.nobreak.Nobreak;
+import com.pmoc.mirante.models.nobreak.NobreakRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

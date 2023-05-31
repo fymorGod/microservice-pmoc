@@ -2,10 +2,10 @@ package com.pmoc.mirante.controller;
 
 
 import com.pmoc.mirante.dtos.ReceptorDTO;
-import com.pmoc.mirante.receptor.DataListingReceptor;
-import com.pmoc.mirante.receptor.DataUpdatingReceptor;
-import com.pmoc.mirante.receptor.Receptor;
-import com.pmoc.mirante.receptor.ReceptorRepository;
+import com.pmoc.mirante.models.receptor.DataListingReceptor;
+import com.pmoc.mirante.models.receptor.DataUpdatingReceptor;
+import com.pmoc.mirante.models.receptor.Receptor;
+import com.pmoc.mirante.models.receptor.ReceptorRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
