@@ -15,7 +15,6 @@ public record StationDTO(
         String longitude,
         @NotBlank
         Double endereco,
-        @NotBlank
         String link_grafana
 ) {
 }
