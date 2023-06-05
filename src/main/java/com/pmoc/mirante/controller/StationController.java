@@ -1,7 +1,7 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.StationDTO;
-import com.pmoc.mirante.models.secao.StationModel;
+import com.pmoc.mirante.models.station.StationModel;
 import com.pmoc.mirante.services.StationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -33,8 +33,9 @@ public class StationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(stationService.save(stationModel));
     }
 
-    GetMapping
+    @GetMapping
     public ResponseEntity<List<StationModel>> gettAllStations() {
         return ResponseEntity.status(HttpStatus.OK).body(stationService.findAll());
     }
+
 }

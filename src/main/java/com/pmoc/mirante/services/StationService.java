@@ -1,7 +1,7 @@
 package com.pmoc.mirante.services;
 
-import com.pmoc.mirante.models.secao.StationModel;
-import com.pmoc.mirante.models.secao.StationRepository;
+import com.pmoc.mirante.models.station.StationModel;
+import com.pmoc.mirante.models.station.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

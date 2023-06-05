@@ -1,4 +1,4 @@
-package com.pmoc.mirante.models.secao;
+package com.pmoc.mirante.models.station;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
