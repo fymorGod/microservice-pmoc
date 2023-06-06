@@ -2,7 +2,7 @@ package com.pmoc.mirante.dtos;
 
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.DadosGerais;
-import com.pmoc.mirante.models.receptor.Receptor;
+import com.pmoc.mirante.models.receptor.ReceptorModel;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ public record ParabolicaDTO(
         @NotBlank
         String satelite,
         @NotNull
-        List<Receptor> receptor,
+        List<ReceptorModel> receptor,
         @NotNull
         Categories category
 ) {

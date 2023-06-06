@@ -4,7 +4,7 @@ import com.pmoc.mirante.models.antena.AntenaModel;
 import com.pmoc.mirante.dtos.TransmissorDTO;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.Gerais;
-import com.pmoc.mirante.models.receptor.Receptor;
+import com.pmoc.mirante.models.receptor.ReceptorModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ public class Transmissor {
     private Double canal_fisico;
     private Double canal_virtual;
     @OneToOne(cascade = CascadeType.ALL)
-    private Receptor receptor;
+    private ReceptorModel receptor;
     @ManyToOne
     @JoinColumn(name = "antena_id", nullable = false)
     private AntenaModel antena;

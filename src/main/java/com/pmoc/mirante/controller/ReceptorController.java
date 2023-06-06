@@ -2,43 +2,74 @@ package com.pmoc.mirante.controller;
 
 
 import com.pmoc.mirante.dtos.ReceptorDTO;
-import com.pmoc.mirante.models.receptor.DataListingReceptor;
-import com.pmoc.mirante.models.receptor.DataUpdatingReceptor;
-import com.pmoc.mirante.models.receptor.Receptor;
+import com.pmoc.mirante.dtos.StationDTO;
+import com.pmoc.mirante.models.receptor.ReceptorModel;
 import com.pmoc.mirante.models.receptor.ReceptorRepository;
+import com.pmoc.mirante.models.station.StationModel;
+import com.pmoc.mirante.services.ReceptorService;
+import com.pmoc.mirante.services.StationService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("antenas")
 public class ReceptorController {
     @Autowired
-    private ReceptorRepository repository;
+    private ReceptorService receptorService;
 
     @PostMapping
-    @Transactional
-    public void register(@RequestBody @Valid ReceptorDTO data) {
-        repository.save(new Receptor(data));
+    public ResponseEntity<Object> saveReceptor(@RequestBody @Valid StationDTO stationDTO) {
+        var receptorModel = new ReceptorModel();
+        BeanUtils.copyProperties(stationDTO, receptorModel);
+        receptorModel.setCreatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.CREATED).body(receptorService.save(receptorModel));
     }
+
     @GetMapping
-    public List<DataListingReceptor> getAllReceptores() {
-        return repository.findAllByActiveTrue().stream().map(DataListingReceptor::new).toList();
+    public ResponseEntity<List<ReceptorModel>> gettAllReceptor() {
+        return ResponseEntity.status(HttpStatus.OK).body(receptorService.findAll());
     }
-    @PutMapping
-    @Transactional
-    public void atualizar(@RequestBody @Valid DataUpdatingReceptor dados) {
-        var receptor = repository.getReferenceById(dados.id());
-        receptor.updateInfo(dados);
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneReceptor(@PathVariable(value = "id") UUID id) {
+        Optional<ReceptorModel> receptorModelOptional = receptorService.findById(id);
+        if(!receptorModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receptor not found");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(receptorModelOptional.get());
     }
+
     @DeleteMapping("/{id}")
-    @Transactional
-    public void delete(@PathVariable Long id) {
-        var receptor = repository.getReferenceById(id);
-        receptor.delete();
+    public ResponseEntity<Object> deleteReceptor(@PathVariable(value = "id") UUID id){
+        Optional<ReceptorModel> receptorModelOptional = receptorService.findById(id);
+        if(!receptorModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receptor not found");
+        }
+        receptorService.delete(receptorModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Station deleted Successfully.");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateReceptor(@PathVariable(value = "id") UUID id, @RequestBody @Valid StationDTO stationDTO) {
+        Optional<ReceptorModel> receptorModelOptional = receptorService.findById(id);
+        if(!receptorModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receptor not found");
+        }
+        var receptorModel = new ReceptorModel();
+        BeanUtils.copyProperties(stationDTO, receptorModel);
+        receptorModel.setId(receptorModelOptional.get().getId());
+        receptorModel.setUpdatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.OK).body(receptorService.save(receptorModel));
     }
 }

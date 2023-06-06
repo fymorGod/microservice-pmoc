@@ -3,7 +3,7 @@ package com.pmoc.mirante.dtos;
 import com.pmoc.mirante.models.antena.AntenaModel;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.DadosGerais;
-import com.pmoc.mirante.models.receptor.Receptor;
+import com.pmoc.mirante.models.receptor.ReceptorModel;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -14,7 +14,7 @@ public record TransmissorDTO(
         @NotNull
         Categories category,
         @NotNull
-        Receptor receptor,
+        ReceptorModel receptor,
         @NotNull
         AntenaModel antena,
         @NotNull
