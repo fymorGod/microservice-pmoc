@@ -1,6 +1,6 @@
 package com.pmoc.mirante.models.transmissor;
 
-import com.pmoc.mirante.models.antena.Antena;
+import com.pmoc.mirante.models.antena.AntenaModel;
 import com.pmoc.mirante.dtos.TransmissorDTO;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.Gerais;
@@ -33,7 +33,7 @@ public class Transmissor {
     private Receptor receptor;
     @ManyToOne
     @JoinColumn(name = "antena_id", nullable = false)
-    private Antena antena;
+    private AntenaModel antena;
 
     public Transmissor(TransmissorDTO data){
         this.active = true;

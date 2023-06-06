@@ -1,6 +1,6 @@
 package com.pmoc.mirante.models.transmissor;
 
-import com.pmoc.mirante.models.antena.Antena;
+import com.pmoc.mirante.models.antena.AntenaModel;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.DadosGerais;
 import com.pmoc.mirante.models.receptor.Receptor;
@@ -11,7 +11,7 @@ public record DadosUpdatingTransmissor(
         Long id,
         DadosGerais gerais,
         Categories category,
-        Antena antena,
+        AntenaModel antena,
         Receptor receptor,
         Double canal_fisico,
         Double canal_virtual,

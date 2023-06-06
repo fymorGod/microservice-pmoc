@@ -8,7 +8,7 @@ public record DataListingCombinador(
         Gerais gerais,
         Categories category
 ) {
-    public DataListingCombinador(Combinador combinador){
+    public DataListingCombinador(CombinadorModel combinador){
         this(combinador.getId(), combinador.getGerais(), combinador.getCategory());
     }
 }

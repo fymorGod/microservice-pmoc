@@ -1,9 +1,11 @@
 package com.pmoc.mirante.models.cabo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface CaboRepository extends JpaRepository<Cabo, Long> {
-    List<Cabo> findAllByActiveTrue();
+@Repository
+public interface CaboRepository extends JpaRepository<CaboModel, UUID> {
 }

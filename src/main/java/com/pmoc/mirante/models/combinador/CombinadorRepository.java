@@ -1,9 +1,9 @@
 package com.pmoc.mirante.models.combinador;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface CombinadorRepository extends JpaRepository<Combinador, Long> {
-    List<Combinador> findAllByActiveTrue();
+import java.util.UUID;
+@Repository
+public interface CombinadorRepository extends JpaRepository<CombinadorModel, UUID> {
 }

@@ -1,44 +1,68 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.models.antena.Antena;
-import com.pmoc.mirante.models.antena.AntenaRepository;
-import com.pmoc.mirante.models.antena.DataListingAntena;
-import com.pmoc.mirante.models.antena.DataUpdatingAntena;
 import com.pmoc.mirante.dtos.AntenaDTO;
-import jakarta.transaction.Transactional;
+import com.pmoc.mirante.models.antena.AntenaModel;
+import com.pmoc.mirante.services.AntenaService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("antenas")
+@RequestMapping("/antenas")
 public class AntenaController {
 
     @Autowired
-    private AntenaRepository repository;
+    private AntenaService antenaService;
 
     @PostMapping
-    @Transactional
-    public void register(@RequestBody @Valid AntenaDTO data) {
-        repository.save(new Antena(data));
+    public ResponseEntity<Object> saveAntena(@RequestBody @Valid AntenaDTO antenaDTO) {
+        var antenaModel = new AntenaModel();
+        BeanUtils.copyProperties(antenaDTO, antenaModel);
+        antenaModel.setCreatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.CREATED).body(antenaService.save(antenaModel));
     }
+
     @GetMapping
-    public List<DataListingAntena> getAllAntenas() {
-        return repository.findAllByActiveTrue().stream().map(DataListingAntena::new).toList();
+    public ResponseEntity<List<AntenaModel>> getAllAntenas() {
+        return ResponseEntity.status(HttpStatus.OK).body(antenaService.findAll());
     }
-    @PutMapping
-    @Transactional
-    public void atualizar(@RequestBody @Valid DataUpdatingAntena dados) {
-        var antena = repository.getReferenceById(dados.id());
-        antena.updateInfo(dados);
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneAntena(@PathVariable(value = "id") UUID id) {
+        Optional<AntenaModel> antenaModelOptional = antenaService.findById(id);
+        if(!antenaModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Antena not found");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(antenaModelOptional.get());
     }
     @DeleteMapping("/{id}")
-    @Transactional
-    public void delete(@PathVariable Long id) {
-        var antena = repository.getReferenceById(id);
-        antena.delete();
+    public ResponseEntity<Object> deleteAntena(@PathVariable(value = "id") UUID id) {
+        Optional<AntenaModel> antenaModelOptional = antenaService.findById(id);
+        if(!antenaModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("antena not found");
+        }
+        antenaService.delete(antenaModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Antena deleted successfully");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateAntena(@PathVariable(value = "id") UUID id, @RequestBody @Valid AntenaDTO antenaDTO) {
+        Optional<AntenaModel> antenaModelOptional = antenaService.findById(id);
+        if(!antenaModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Antena not found");
+        }
+        var antenaModel = new AntenaModel();
+        BeanUtils.copyProperties(antenaDTO, antenaModel);
+        antenaModel.setId(antenaModelOptional.get().getId());
+        antenaModel.setUpdatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.OK).body(antenaService.save(antenaModel));
     }
 }

@@ -1,6 +1,6 @@
 package com.pmoc.mirante.dtos;
 
-import com.pmoc.mirante.models.antena.Antena;
+import com.pmoc.mirante.models.antena.AntenaModel;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.DadosGerais;
 import com.pmoc.mirante.models.receptor.Receptor;
@@ -16,7 +16,7 @@ public record TransmissorDTO(
         @NotNull
         Receptor receptor,
         @NotNull
-        Antena antena,
+        AntenaModel antena,
         @NotNull
         Double programmed,
         @NotNull
