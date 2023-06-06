@@ -1,39 +1,69 @@
 package com.pmoc.mirante.controller;
 
-import com.pmoc.mirante.models.dps.DPS;
-import com.pmoc.mirante.models.dps.DPSRepository;
-import com.pmoc.mirante.models.dps.DataListingDPS;
-import com.pmoc.mirante.models.dps.DataUpdatingDPS;
+import com.pmoc.mirante.models.dps.DPSModel;
 import com.pmoc.mirante.dtos.DPSDTO;
+import com.pmoc.mirante.services.DPSService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+@RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/dps")
 public class DPSController {
     @Autowired
-    private DPSRepository repository;
+    private DPSService dpsService;
+
     @PostMapping
-    @Transactional
-    public void register(@RequestBody @Valid DPSDTO dpsdto) {
-        repository.save(new DPS(dpsdto));
+    public ResponseEntity<Object> saveStation(@RequestBody @Valid DPSDTO dpsdto) {
+
+        var dpsModel = new DPSModel();
+        BeanUtils.copyProperties(dpsdto, dpsModel);
+        dpsModel.setCreatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.CREATED).body(dpsService.save(dpsModel));
     }
+
     @GetMapping
-    public List<DataListingDPS> getAllDPS() {
-        return repository.findAllByActiveTrue().stream().map(DataListingDPS::new).toList();
+    public ResponseEntity<List<DPSModel>> gettAllDPS() {
+        return ResponseEntity.status(HttpStatus.OK).body(dpsService.findAll());
     }
-    @PutMapping
-    @Transactional
-    public void updateExaustor(@RequestBody @Valid DataUpdatingDPS data) {
-        var dps = repository.getReferenceById(data.id());
-        dps.updateInfo(data);
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneDPS(@PathVariable(value = "id") UUID id) {
+        Optional<DPSModel> dpsModelOptional = dpsService.findById(id);
+        if(!dpsModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("DPS not found.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(dpsModelOptional.get());
     }
+
     @DeleteMapping("/{id}")
-    @Transactional
-    public void delete(@PathVariable(value = "id") Long id) {
-        var dps = repository.getReferenceById(id);
-        dps.delete();
+    public ResponseEntity<Object> deleteStation(@PathVariable(value = "id") UUID id){
+        Optional<DPSModel> dpsModelOptional = dpsService.findById(id);
+        if(!dpsModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("DPS not found.");
+        }
+        dpsService.delete(dpsModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("DPS deleted Successfully.");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateStation(@PathVariable(value = "id") UUID id, @RequestBody @Valid DPSDTO dpsdto) {
+        Optional<DPSModel> dpsModelOptional = dpsService.findById(id);
+        if(!dpsModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("DPS not found.");
+        }
+        var dpsModel = new DPSModel();
+        BeanUtils.copyProperties(dpsdto, dpsModel);
+        dpsModel.setId(dpsModelOptional.get().getId());
+        dpsModel.setUpdatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.OK).body(dpsService.save(dpsModel));
     }
 }

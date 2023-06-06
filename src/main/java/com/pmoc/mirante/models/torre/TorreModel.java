@@ -1,43 +1,39 @@
-package com.pmoc.mirante.models.parabolica;
+package com.pmoc.mirante.models.torre;
 
 import com.pmoc.mirante.enums.Categories;
+import com.pmoc.mirante.enums.TiposTorre;
 import com.pmoc.mirante.models.gerais.Gerais;
-import com.pmoc.mirante.models.receptor.Receptor;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-@Table(name = "PARABOLICA")
-@Entity
+@Table(name = "torres")
+@Entity(name = "Torre")
 @Getter
 @Setter
-public class Parabolica  implements Serializable {
+public class TorreModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Embedded
     private Gerais gerais;
-    @Column(nullable = false, length = 250)
-    private Double diametro;
-    @Column(nullable = false, length = 250)
-    private String satelite;
-
-    @OneToMany(mappedBy = "parabolica")
-    private List<Receptor> receptor;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 250)
     private Categories category;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 250)
+    private TiposTorre tipos_estrutura;
+    @Column(nullable = false)
+    private Boolean aterramento;
+    @Column(nullable = false, length = 250)
+    private Double altura;
     @Column(nullable = false)
     private LocalDateTime createdAt;
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-
 }

@@ -1,43 +1,68 @@
 package com.pmoc.mirante.controller;
 
 import com.pmoc.mirante.dtos.TelemetriaDTO;
-import com.pmoc.mirante.models.telemetria.DataListingTelemetria;
-import com.pmoc.mirante.models.telemetria.DataUpdatingTelemetria;
-import com.pmoc.mirante.models.telemetria.Telemetria;
-import com.pmoc.mirante.models.telemetria.TelemetriaRepository;
+import com.pmoc.mirante.models.telemetria.TelemetriaModel;
+import com.pmoc.mirante.services.TelemetriaService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("telemetria")
+@RequestMapping("/telemetria")
 public class TelemetriaController {
     @Autowired
-    private TelemetriaRepository telemetriaRepository;
+    private TelemetriaService telemetriaService;
 
     @PostMapping
-    @Transactional
-    public void register(@RequestBody @Valid TelemetriaDTO telemetriaDTO) {
-        telemetriaRepository.save(new Telemetria(telemetriaDTO));
+    public ResponseEntity<Object> saveStation(@RequestBody @Valid TelemetriaDTO telemetriaDTO) {
+        var telemetriaModel = new TelemetriaModel();
+        BeanUtils.copyProperties(telemetriaDTO, telemetriaModel);
+        telemetriaModel.setCreatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.CREATED).body(telemetriaService.save(telemetriaModel));
     }
+
     @GetMapping
-    public List<DataListingTelemetria> getAllTelemetrias() {
-        return telemetriaRepository.findAllByActiveTrue().stream().map(DataListingTelemetria::new).toList();
+    public ResponseEntity<List<TelemetriaModel>> gettAllStations() {
+        return ResponseEntity.status(HttpStatus.OK).body(telemetriaService.findAll());
     }
-    @PutMapping
-    @Transactional
-    public void updateTelemetria(@RequestBody @Valid DataUpdatingTelemetria data) {
-        var telemetria = telemetriaRepository.getReferenceById(data.id());
-        telemetria.updateInfo(data);
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneStation(@PathVariable(value = "id") UUID id) {
+        Optional<TelemetriaModel> telemetriaModelOptional = telemetriaService.findById(id);
+        if(!telemetriaModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Station not found.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(telemetriaModelOptional.get());
     }
+
     @DeleteMapping("/{id}")
-    @Transactional
-    public void delete(@PathVariable(value = "id") Long id){
-        var telemetria = telemetriaRepository.getReferenceById(id);
-        telemetria.delete();
+    public ResponseEntity<Object> deleteStation(@PathVariable(value = "id") UUID id){
+        Optional<TelemetriaModel> telemetriaModelOptional = telemetriaService.findById(id);
+        if(!telemetriaModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Station not found");
+        }
+        telemetriaService.delete(telemetriaModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Station deleted Successfully.");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateStation(@PathVariable(value = "id") UUID id, @RequestBody @Valid TelemetriaDTO telemetriaDTO) {
+        Optional<TelemetriaModel> telemetriaModelOptional = telemetriaService.findById(id);
+        if(!telemetriaModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Station not found");
+        }
+        var telemetriaModel = new TelemetriaModel();
+        BeanUtils.copyProperties(telemetriaDTO, telemetriaModel);
+        telemetriaModel.setId(telemetriaModelOptional.get().getId());
+        telemetriaModel.setUpdatedAt(LocalDateTime.now(ZoneId.of("UFC")));
+        return ResponseEntity.status(HttpStatus.OK).body(telemetriaService.save(telemetriaModel));
     }
 }

@@ -1,21 +1,18 @@
-package com.pmoc.mirante.models.parabolica;
+package com.pmoc.mirante.models.nobreak;
 
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.Gerais;
-import com.pmoc.mirante.models.receptor.Receptor;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-@Table(name = "PARABOLICA")
+@Table(name = "NOBREAK")
 @Entity
 @Getter
 @Setter
-public class Parabolica  implements Serializable {
+public class NobreakModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,20 +21,15 @@ public class Parabolica  implements Serializable {
     private UUID id;
     @Embedded
     private Gerais gerais;
-    @Column(nullable = false, length = 250)
-    private Double diametro;
-    @Column(nullable = false, length = 250)
-    private String satelite;
-
-    @OneToMany(mappedBy = "parabolica")
-    private List<Receptor> receptor;
-
+    @Column(nullable = false, length = 100)
+    private int tensao_entrada;
+    @Column(nullable = false, length = 100)
+    private int tensao_saida;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 250)
+    @Column(nullable = false, length = 100)
     private Categories category;
     @Column(nullable = false)
     private LocalDateTime createdAt;
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-
 }

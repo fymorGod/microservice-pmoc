@@ -2,8 +2,7 @@ package com.pmoc.mirante.models.dps;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.UUID;
 
-public interface DPSRepository extends JpaRepository<DPS, Long> {
-    List<DPS> findAllByActiveTrue();
+public interface DPSRepository extends JpaRepository<DPSModel, UUID> {
 }

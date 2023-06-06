@@ -2,8 +2,7 @@ package com.pmoc.mirante.models.disjuntor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.UUID;
 
-public interface DisjuntorRepository extends JpaRepository<Disjuntor, Long> {
-    List<Disjuntor> findAllByActiveTrue();
+public interface DisjuntorRepository extends JpaRepository<DisjuntorModel, UUID> {
 }
