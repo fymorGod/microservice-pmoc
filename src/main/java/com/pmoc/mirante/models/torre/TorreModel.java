@@ -3,6 +3,7 @@ package com.pmoc.mirante.models.torre;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.enums.TiposTorre;
 import com.pmoc.mirante.models.gerais.Gerais;
+import com.pmoc.mirante.models.station.StationModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,8 +11,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Table(name = "torres")
-@Entity(name = "Torre")
+@Table(name = "torre")
+@Entity
 @Getter
 @Setter
 public class TorreModel implements Serializable {
@@ -32,6 +33,10 @@ public class TorreModel implements Serializable {
     private Boolean aterramento;
     @Column(nullable = false, length = 250)
     private Double altura;
+    @ManyToOne
+    @JoinColumn(name = "station_id", nullable = false)
+    private StationModel station;
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
     @Column(nullable = false)

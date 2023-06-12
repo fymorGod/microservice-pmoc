@@ -23,7 +23,7 @@ public class DPSController {
     private DPSService dpsService;
 
     @PostMapping
-    public ResponseEntity<Object> saveStation(@RequestBody @Valid DPSDTO dpsdto) {
+    public ResponseEntity<Object> saveDPS(@RequestBody @Valid DPSDTO dpsdto) {
 
         var dpsModel = new DPSModel();
         BeanUtils.copyProperties(dpsdto, dpsModel);
@@ -45,7 +45,7 @@ public class DPSController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteStation(@PathVariable(value = "id") UUID id){
+    public ResponseEntity<Object> deleteDPS(@PathVariable(value = "id") UUID id){
         Optional<DPSModel> dpsModelOptional = dpsService.findById(id);
         if(!dpsModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("DPS not found.");
@@ -55,7 +55,7 @@ public class DPSController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateStation(@PathVariable(value = "id") UUID id, @RequestBody @Valid DPSDTO dpsdto) {
+    public ResponseEntity<Object> updateDPS(@PathVariable(value = "id") UUID id, @RequestBody @Valid DPSDTO dpsdto) {
         Optional<DPSModel> dpsModelOptional = dpsService.findById(id);
         if(!dpsModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("DPS not found.");

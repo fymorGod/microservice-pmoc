@@ -3,7 +3,8 @@ package com.pmoc.mirante.models.antena;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.enums.TiposAntena;
 import com.pmoc.mirante.models.gerais.Gerais;
-import com.pmoc.mirante.models.transmissor.Transmissor;
+import com.pmoc.mirante.models.station.StationModel;
+import com.pmoc.mirante.models.transmissor.TransmissorModel;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Table(name = "ANTENA")
+@Table(name = "antena")
 @Entity
 @Getter
 @Setter
@@ -42,7 +43,8 @@ public class AntenaModel implements Serializable {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "transmissor")
-    private List<Transmissor> transmissor;
+    @ManyToOne
+    @JoinColumn(name = "station_id", nullable = false)
+    private StationModel station;
 
 }

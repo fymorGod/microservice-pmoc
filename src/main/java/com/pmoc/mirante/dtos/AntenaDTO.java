@@ -3,7 +3,7 @@ package com.pmoc.mirante.dtos;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.enums.TiposAntena;
 import com.pmoc.mirante.models.gerais.DadosGerais;
-import com.pmoc.mirante.models.transmissor.Transmissor;
+import com.pmoc.mirante.models.transmissor.TransmissorModel;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +27,6 @@ public record AntenaDTO(
         @NotBlank
         String gain,
         @NotNull
-        List<Transmissor> transmissor
+        List<TransmissorModel> transmissor
 ) {
 }

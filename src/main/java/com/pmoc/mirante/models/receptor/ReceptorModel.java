@@ -3,15 +3,17 @@ package com.pmoc.mirante.models.receptor;
 import com.pmoc.mirante.enums.Categories;
 import com.pmoc.mirante.models.gerais.Gerais;
 import com.pmoc.mirante.models.parabolica.Parabolica;
+import com.pmoc.mirante.models.station.StationModel;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
-@Table(name = "receptores")
-@Entity(name = "Receptor")
+@Table(name = "receptor")
+@Entity
 @Getter
 @Setter
 public class ReceptorModel  implements Serializable {
@@ -29,6 +31,11 @@ public class ReceptorModel  implements Serializable {
     @ManyToOne
     @JoinColumn(name = "parabolica_id", nullable = false)
     private Parabolica parabolica;
+
+    @ManyToOne
+    @JoinColumn(name = "station_id", nullable = false)
+    private StationModel station;
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 250)

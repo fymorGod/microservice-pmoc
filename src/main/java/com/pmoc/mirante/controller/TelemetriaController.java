@@ -23,7 +23,7 @@ public class TelemetriaController {
     private TelemetriaService telemetriaService;
 
     @PostMapping
-    public ResponseEntity<Object> saveStation(@RequestBody @Valid TelemetriaDTO telemetriaDTO) {
+    public ResponseEntity<Object> saveTelemetria(@RequestBody @Valid TelemetriaDTO telemetriaDTO) {
         var telemetriaModel = new TelemetriaModel();
         BeanUtils.copyProperties(telemetriaDTO, telemetriaModel);
         telemetriaModel.setCreatedAt(LocalDateTime.now(ZoneId.of("UFC")));
@@ -31,11 +31,11 @@ public class TelemetriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TelemetriaModel>> gettAllStations() {
+    public ResponseEntity<List<TelemetriaModel>> gettAllTelemetria() {
         return ResponseEntity.status(HttpStatus.OK).body(telemetriaService.findAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneStation(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneTelemetria(@PathVariable(value = "id") UUID id) {
         Optional<TelemetriaModel> telemetriaModelOptional = telemetriaService.findById(id);
         if(!telemetriaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Station not found.");
@@ -44,7 +44,7 @@ public class TelemetriaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteStation(@PathVariable(value = "id") UUID id){
+    public ResponseEntity<Object> deleteTelemetria(@PathVariable(value = "id") UUID id){
         Optional<TelemetriaModel> telemetriaModelOptional = telemetriaService.findById(id);
         if(!telemetriaModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Station not found");
@@ -54,7 +54,7 @@ public class TelemetriaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateStation(@PathVariable(value = "id") UUID id, @RequestBody @Valid TelemetriaDTO telemetriaDTO) {
+    public ResponseEntity<Object> updateTelemetria(@PathVariable(value = "id") UUID id, @RequestBody @Valid TelemetriaDTO telemetriaDTO) {
         Optional<TelemetriaModel> telemetriaModelOptional = telemetriaService.findById(id);
         if(!telemetriaModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Station not found");

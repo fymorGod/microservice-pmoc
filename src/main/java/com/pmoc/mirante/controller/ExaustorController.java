@@ -29,7 +29,7 @@ public class ExaustorController {
     private ExaustorService exaustorService;
 
     @PostMapping
-    public ResponseEntity<Object> saveStation(@RequestBody @Valid ExaustorDTO exaustorDTO) {
+    public ResponseEntity<Object> saveExaustor(@RequestBody @Valid ExaustorDTO exaustorDTO) {
 
         var exaustorModel = new ExaustorModel();
         BeanUtils.copyProperties(exaustorDTO, exaustorModel);
@@ -51,7 +51,7 @@ public class ExaustorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteStation(@PathVariable(value = "id") UUID id){
+    public ResponseEntity<Object> deleteExaustor(@PathVariable(value = "id") UUID id){
         Optional<ExaustorModel> exaustorModelOptional = exaustorService.findById(id);
         if(!exaustorModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exaustor not found.");
@@ -61,7 +61,7 @@ public class ExaustorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateStation(@PathVariable(value = "id") UUID id, @RequestBody @Valid ExaustorDTO exaustorDTO) {
+    public ResponseEntity<Object> updateExaustor(@PathVariable(value = "id") UUID id, @RequestBody @Valid ExaustorDTO exaustorDTO) {
         Optional<ExaustorModel> exaustorModelOptional = exaustorService.findById(id);
         if(!exaustorModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exaustor not found.");
