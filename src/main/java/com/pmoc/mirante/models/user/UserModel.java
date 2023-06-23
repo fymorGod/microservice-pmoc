@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -17,16 +16,22 @@ import java.util.UUID;
 @Getter
 @Setter
 public class UserModel implements UserDetails, Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID userId;
+
     @Column(nullable = false, unique = true)
     private String username;
+
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany
-    @JoinTable(name = "TB_USERS_ROLES", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "TB_USERS_ROLES",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RoleModel> roles;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -34,13 +39,12 @@ public class UserModel implements UserDetails, Serializable {
     }
 
     @Override
-    public String getPassword() {
-        return this.getPassword();
-    }
-
-    @Override
     public String getUsername() {
-        return this.getUsername();
+        return username;
+    }
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

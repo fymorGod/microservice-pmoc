@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("antenas")
+@RequestMapping("/receptor")
 public class ReceptorController {
     @Autowired
     private ReceptorService receptorService;

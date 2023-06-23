@@ -23,8 +23,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Table(name = "station")
 @Entity
+@Table(name = "station")
 @Getter
 @Setter
 public class StationModel implements Serializable {

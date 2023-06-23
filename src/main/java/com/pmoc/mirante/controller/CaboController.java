@@ -44,15 +44,6 @@ public class CaboController {
        return ResponseEntity.status(HttpStatus.OK).body(caboModelOptional.get());
    }
    @DeleteMapping("/{id}")
-   public ResponseEntity<Object> deleteCabo(@PathVariable(value = "id") UUID id) {
-       Optional<CaboModel> caboModelOptional = caboService.findById(id);
-       if(!caboModelOptional.isPresent()){
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cabo not found");
-       }
-       caboService.delete(caboModelOptional.get());
-       return ResponseEntity.status(HttpStatus.OK).body("Cabo deleted successfully");
-   }
-   @DeleteMapping("/{id}")
    public ResponseEntity<Object> updateCabo(@PathVariable(value = "id") UUID id, @RequestBody @Valid CaboDTO caboDTO){
        Optional<CaboModel> caboModelOptional = caboService.findById(id);
        if(!caboModelOptional.isPresent()){

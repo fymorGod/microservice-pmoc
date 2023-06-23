@@ -19,9 +19,6 @@ public class StationService {
     public StationModel save(StationModel sectionModel) {
         return repository.save(sectionModel);
     }
-    public boolean existsByStation(String nome) {
-        return repository.existsByStation(nome);
-    }
     public List<StationModel> findAll() {
         return repository.findAll();
     }

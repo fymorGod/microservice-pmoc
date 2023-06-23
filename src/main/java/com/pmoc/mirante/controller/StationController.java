@@ -25,9 +25,6 @@ public class StationController {
 
     @PostMapping
     public ResponseEntity<Object> saveStation(@RequestBody @Valid StationDTO stationDTO) {
-        if(stationService.existsByStation(stationDTO.nome())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Station already registered for this name!");
-        }
         var stationModel = new StationModel();
         BeanUtils.copyProperties(stationDTO, stationModel);
         stationModel.setCreatedAt(LocalDateTime.now(ZoneId.of("UFC")));
